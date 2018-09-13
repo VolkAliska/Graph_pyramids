@@ -1,6 +1,6 @@
-#include <windows.h>
+#include <windows.h> // color pixels
 #include <iostream>
-#include <cmath>
+#include <cmath> // matrix
 #include <stdlib.h>
 using namespace std;
 
