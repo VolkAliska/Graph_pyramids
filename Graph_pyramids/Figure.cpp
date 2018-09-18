@@ -6,6 +6,7 @@
 #include <math.h>
 #include "Figure.h"
 using namespace std;
+const int dk = 10;
 
 HWND hwndf = GetConsoleWindow();
 HDC hdcf = GetDC(hwndf);
@@ -86,6 +87,18 @@ point Figure::getCenter(Matrix base){
 	center.y = (ybufmax + ybufmin) / 2;
 	center.z = (zbufmax + zbufmin) / 2;
 	return center;
+}
+
+void Figure::Move(Matrix chn, bool dx, bool dy, bool dz){
+	if (dx == true){
+		chn.matr[0][3] += dk;
+	}
+	if (dy == true){
+		chn.matr[1][3] += dk;
+	}
+	if (dz == true){
+		chn.matr[2][3] += dk;
+	}
 }
 
 void Figure::Rotate(){

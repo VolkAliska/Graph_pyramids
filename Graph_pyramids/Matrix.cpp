@@ -23,6 +23,12 @@ Matrix::Matrix(int n, int m)
 	}
 }
 
+Matrix::Matrix(){
+	matr = nullptr;
+	n = 0;
+	m = 0;
+}
+
 void Matrix::ShowMatrix(){
 	int i, j;
 	for (i = 0; i<n; i++){
@@ -46,9 +52,17 @@ Matrix Matrix::Mul(Matrix base, Matrix change){
 			for (int inner = 0; inner < change.n; inner++) {
 				res.matr[row][col] += base.matr[row][inner] * change.matr[inner][col];
 			}
-			std::cout << res.matr[row][col] << "  ";
+			//std::cout << res.matr[row][col] << "  ";
 		}
-		std::cout << "\n";
+		//std::cout << "\n";
 	}
 	return res;
 }
+
+//Matrix operator +(const Matrix m1, const Matrix m2){
+//	Matrix res(m1.n, m1.m);
+//	if ((m1.n != m2.n) && (m1.m != m2.m)){
+//		cout << "error size mismatch" << endl;
+//		return res;
+//	}
+//}
