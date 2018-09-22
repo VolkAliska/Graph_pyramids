@@ -101,6 +101,18 @@ void Figure::Move(Matrix chn, bool dx, bool dy, bool dz){
 	}
 }
 
+void Figure::DisMove(Matrix chn, bool dx, bool dy, bool dz){
+	if (dx == true){
+		chn.matr[0][3] -= dk;
+	}
+	if (dy == true){
+		chn.matr[1][3] -= dk;
+	}
+	if (dz == true){
+		chn.matr[2][3] -= dk;
+	}
+}
+
 void Figure::Rotate(){
 
 }

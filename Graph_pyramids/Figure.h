@@ -24,6 +24,7 @@ public:
 	void Color(COLORREF color);
 	void Rotate();
 	void Move(Matrix chn, bool dx, bool dy, bool dz);
+	void DisMove(Matrix chn, bool dx, bool dy, bool dz);
 	void Scale();
 	point getCenter(Matrix base);
 };
