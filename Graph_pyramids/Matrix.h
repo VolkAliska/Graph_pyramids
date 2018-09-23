@@ -15,6 +15,10 @@ public:
 	//~Matrix();
 	Matrix Mul(Matrix base, Matrix change);
 	void ShowMatrix();
+
+	//void Norm(point cen);
+	//void Back(point cen);
+
 	//friend Matrix operator +(const Matrix m1, const Matrix m2);
 };
 

@@ -18,14 +18,15 @@ public:
 	int n; 
 	Figure(int n); // n - number of vertexes
 	//int bitmap[MAXSIZE][MAXSIZE];
-	
+	int kx, ky, kz; // for rotation
 	void DrawBrezenhem(int x1, int y1, int x2, int y2);
 	void Draw(Matrix current);
-	void Color(COLORREF color);
+	//void Color(COLORREF color);
 	void Rotate();
 	void Move(Matrix chn, bool dx, bool dy, bool dz);
 	void DisMove(Matrix chn, bool dx, bool dy, bool dz);
-	void Scale();
+	void ScaleBig(Matrix chn);
+	void ScaleSmall(Matrix chn);
 	point getCenter(Matrix base);
 };
 

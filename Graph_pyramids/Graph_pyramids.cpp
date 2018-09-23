@@ -28,20 +28,20 @@ int main(){
 		}
 	}
 	point p1center;
-	p1center = p1.getCenter(p1base);
+	
 	//example 
 	p1base.matr[0][0] = 2 * k; p1base.matr[0][1] = 3.5 * k; p1base.matr[0][2] = k; p1base.matr[0][3] = 1;
 	p1base.matr[1][0] = 3 * k; p1base.matr[1][1] = 2.5 * k; p1base.matr[1][2] = 2 * k; p1base.matr[1][3] = 1;
 	p1base.matr[2][0] = 4 * k; p1base.matr[2][1] = 3 * k; p1base.matr[2][2] = 3 * k; p1base.matr[2][3] = 1;
 	p1base.matr[3][0] = 3*k; p1base.matr[3][1] = k; p1base.matr[3][2] = 2*k; p1base.matr[3][3] = 1;
 	p1.Draw(p1base);
+	p1center = p1.getCenter(p1base);
 
 	for (int i = 0; i < p1base.n; i++){
 		for (int j = 0; j < p1base.m; j++){
 			p1current.matr[i][j] = p1base.matr[i][j];
 		}
 	}
-	p1current.ShowMatrix();
 	Figure p2(5); // pyramid with the rectangle as a foundation
 	Matrix p2base(5, 4);
 	Matrix p2current(5,4);
@@ -53,7 +53,6 @@ int main(){
 		}
 	}
 	point p2center;
-	p2center = p2.getCenter(p2base);
 	//example 
 	p2base.matr[0][0] = 5 * k; p2base.matr[0][1] = 3.5 * k; p2base.matr[0][2] = k; p2base.matr[0][3] = 1;
 	p2base.matr[1][0] = 6 * k; p2base.matr[1][1] = 2.5 * k; p2base.matr[1][2] = 2 * k; p2base.matr[1][3] = 1;
@@ -61,6 +60,8 @@ int main(){
 	p2base.matr[3][0] = 6.5 * k; p2base.matr[3][1] = 4.5 * k; p2base.matr[3][2] = 2 * k; p2base.matr[3][3] = 1;
 	p2base.matr[4][0] = 6 * k; p2base.matr[4][1] = k; p2base.matr[4][2] = 2 * k; p2base.matr[4][3] = 1;
 	p2.Draw(p2base);
+
+	p2center = p2.getCenter(p2base);
 	for (int i = 0; i < p2base.n; i++){
 		for (int j = 0; j < p2base.m; j++){
 			p2current.matr[i][j] = p2base.matr[i][j];
@@ -185,8 +186,63 @@ int main(){
 						mode = _getwch();
 						switch (mode){
 						case '1': // big
+							p1.ScaleBig(p1chn);
+							for (int i = 0; i < p1base.n; i++){
+								p1base.matr[i][0] -= p1center.x;
+								p1base.matr[i][1] -= p1center.y;
+								p1base.matr[i][2] -= p1center.z;
+							}
+							point curc;
+							curc = p1.getCenter(p1current);
+							for (int i = 0; i < p1base.n; i++){
+								p1current.matr[i][0] = p1base.matr[i][0] * p1chn.matr[3][3];
+								p1current.matr[i][1] = p1base.matr[i][1] * p1chn.matr[3][3];
+								p1current.matr[i][2] = p1base.matr[i][2] * p1chn.matr[3][3];
+							}
+							for (int i = 0; i < p1base.n; i++){
+								p1current.matr[i][0] += p1center.x;
+								p1current.matr[i][1] += p1center.y;
+								p1current.matr[i][2] += p1center.z;
+								p1base.matr[i][0] += p1center.x;
+								p1base.matr[i][1] += p1center.y;
+								p1base.matr[i][2] += p1center.z;
+							}
+							curc = p1.getCenter(p1current);
+							system("cls");
+							p1.Draw(p1current);
+							p2.Draw(p2current);
 							break;
 						case '2': // small
+							p1.ScaleSmall(p1chn);
+							for (int i = 0; i < p1base.n; i++){
+								p1base.matr[i][0] -= p1center.x;
+								p1base.matr[i][1] -= p1center.y;
+								p1base.matr[i][2] -= p1center.z;
+							}
+							curc = p1.getCenter(p1current);
+							for (int i = 0; i < p1base.n; i++){
+								p1current.matr[i][0] = p1base.matr[i][0] * p1chn.matr[3][3];
+								p1current.matr[i][1] = p1base.matr[i][1] * p1chn.matr[3][3];
+								p1current.matr[i][2] = p1base.matr[i][2] * p1chn.matr[3][3];
+							}
+							for (int i = 0; i < p1base.n; i++){
+								p1current.matr[i][0] += p1center.x;
+								p1current.matr[i][1] += p1center.y;
+								p1current.matr[i][2] += p1center.z;
+								p1base.matr[i][0] += p1center.x;
+								p1base.matr[i][1] += p1center.y;
+								p1base.matr[i][2] += p1center.z;
+							}
+							curc = p1.getCenter(p1current);
+							system("cls");
+							p1.Draw(p1current);
+							p2.Draw(p2current);
+							break;
+						case '3':
+							flag = 1;
+						}
+						if (flag){
+							flag = 0;
 							break;
 						}
 					}

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "Matrix.h"
+#include "Figure.h"
 using namespace std;
 
 Matrix::Matrix(int n, int m)
@@ -21,6 +22,7 @@ Matrix::Matrix(int n, int m)
 			matr[i][j] = 0;
 		}
 	}
+	matr[3][3] = 1;
 }
 
 Matrix::Matrix(){
@@ -59,10 +61,3 @@ Matrix Matrix::Mul(Matrix base, Matrix change){
 	return res;
 }
 
-//Matrix operator +(const Matrix m1, const Matrix m2){
-//	Matrix res(m1.n, m1.m);
-//	if ((m1.n != m2.n) && (m1.m != m2.m)){
-//		cout << "error size mismatch" << endl;
-//		return res;
-//	}
-//}

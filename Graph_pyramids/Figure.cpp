@@ -7,6 +7,7 @@
 #include "Figure.h"
 using namespace std;
 const int dk = 10;
+const int dv = 2;
 
 HWND hwndf = GetConsoleWindow();
 HDC hdcf = GetDC(hwndf);
@@ -14,6 +15,8 @@ COLORREF colorf = RGB(180, 0, 20);
 
 Figure::Figure(int n){
 	this->n = n;
+	kx = 1; ky = 1; kz = 1;
+
 	/*for (int i = 0; i < MAXSIZE; i++){
 		for(int j = 0; j < MAXSIZE; j++){
 			bitmap[i][j] = 0;
@@ -112,6 +115,15 @@ void Figure::DisMove(Matrix chn, bool dx, bool dy, bool dz){
 		chn.matr[2][3] -= dk;
 	}
 }
+
+void Figure::ScaleBig(Matrix chn){
+	chn.matr[3][3] *= dv;
+}
+
+void Figure::ScaleSmall(Matrix chn){
+	chn.matr[3][3] /= dv;
+}
+
 
 void Figure::Rotate(){
 
