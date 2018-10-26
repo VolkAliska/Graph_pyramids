@@ -1,9 +1,9 @@
 /* Matrix.h */
 
+
 #ifndef MATRIX
 #define MATRIX
-#include <iostream>
-#include <cstdlib>
+#include "stdafx.h"
 using namespace std; 
 
 class Matrix{

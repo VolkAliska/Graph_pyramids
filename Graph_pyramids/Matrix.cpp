@@ -1,8 +1,6 @@
 /*Matrix.cpp*/
 
-
-#include <iostream>
-#include <cstdlib>
+#include "stdafx.h"
 #include "Matrix.h"
 #include "Figure.h"
 using namespace std;

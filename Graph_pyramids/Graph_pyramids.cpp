@@ -1,9 +1,6 @@
 /* (Main)  Graph_pyramids.cpp */
 
-#include <windows.h> // color pixels
-#include <iostream>
-#include <cmath> // matrix
-#include <stdlib.h>
+#include "stdafx.h"
 #include "Matrix.h"
 #include "Figure.h"
 using namespace std;

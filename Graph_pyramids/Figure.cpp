@@ -1,9 +1,6 @@
 /*Figure.cpp*/
 
-#include <windows.h> // color pixels
-#include <iostream>
-#include <cstdlib>
-#include <math.h>
+#include "stdafx.h"
 #include "Figure.h"
 using namespace std;
 const int dk = 10;

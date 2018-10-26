@@ -2,8 +2,7 @@
 
 #ifndef FIGURE
 #define FIGURE
-#include <iostream>
-#include <cstdlib>
+#include "stdafx.h"
 #include "Matrix.h"
 //#define MAXSIZE 
 

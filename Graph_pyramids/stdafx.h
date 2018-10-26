@@ -1,15 +1,20 @@
-// stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently, but
-// are changed infrequently
+// stdafx.h: включаемый файл дл€ стандартных системных включаемых файлов
+// или включаемых файлов дл€ конкретного проекта, которые часто используютс€, но
+// не часто измен€ютс€
 //
 
 #pragma once
 
 #include "targetver.h"
 
+#include <iostream>
 #include <stdio.h>
 #include <tchar.h>
+#include <windows.h> // color pixels
+#include <cmath> // matrix
+#include <stdlib.h>
+#include <cstdlib>
 
 
 
-// TODO: reference additional headers your program requires here
+// TODO: ”становите здесь ссылки на дополнительные заголовки, требующиес€ дл€ программы
