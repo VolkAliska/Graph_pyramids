@@ -13,7 +13,7 @@ public:
 	Matrix(int n, int m);
 	Matrix();
 	//~Matrix();
-	Matrix Mul(Matrix base, Matrix change);
+	Matrix mul(Matrix base, Matrix change);
 	void ShowMatrix();
 
 	//void Norm(point cen);

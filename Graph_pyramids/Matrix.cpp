@@ -40,19 +40,23 @@ void Matrix::ShowMatrix(){
 	cout << "\n";
 }
 
-Matrix Matrix::Mul(Matrix base, Matrix change){
+Matrix Matrix::mul(Matrix base, Matrix change){
 	Matrix res(base.n, base.m);
+	
 	for (int i = 0; i < base.n; i++){
 		for (int j = 0; j < base.m; j++){
 			res.matr[i][j] = 0;
 		}
 	}
+	double buf = 0;
 	for (int row = 0; row < base.n; row++) {
-		for (int col = 0; col < base.m; col++) {
-			for (int inner = 0; inner < change.n; inner++) {
-				res.matr[row][col] += base.matr[row][inner] * change.matr[inner][col];
+		for (int col = 0; col < 4; col++) {
+			buf = 0;
+			for (int inner = 0; inner < 4; inner++) {
+				buf += base.matr[row][inner] * change.matr[inner][col];
 			}
 			//std::cout << res.matr[row][col] << "  ";
+			res.matr[row][col] = buf;
 		}
 		//std::cout << "\n";
 	}
