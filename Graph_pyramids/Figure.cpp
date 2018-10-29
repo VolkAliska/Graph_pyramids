@@ -4,7 +4,9 @@
 #include "Figure.h"
 using namespace std;
 const int dk = 10;
-const double dv = 2;
+const double dv = 2.0;
+const float PI = 3.14;
+const double UNGLE = 15.0;
 
 HWND hwndf = GetConsoleWindow();
 HDC hdcf = GetDC(hwndf);
@@ -31,7 +33,7 @@ void Figure::drawBrezenhem(double x1, double y1, double x2, double y2) {
 
 	SetPixel(hdcf, x2, y2, RGB(255, 255, 255));
 	//bitmap[y2][x2] = 2;//граница
-	while (x1 != x2 || y1 != y2)
+	while ((int(x1) != int(x2)) || (int(y1) != int(y2)))
 	{
 		SetPixel(hdcf, x1, y1, RGB(255, 255, 255));
 		//bitmap[y1][x1] = 2;
@@ -94,24 +96,17 @@ void Figure::drawRectangle(point p1, point p2, point p3, point p4){
 
 point Figure::getCenter(Matrix current){
 	point center;
-	double xbufmax = 0, xbufmin = 0;
-	for (int i = 0; i < this->n; i++){
-		xbufmax = max(xbufmax, current.matr[i][0]);
-		xbufmin = min(xbufmax, current.matr[i][0]);
+	int sumx = 0;
+	int sumy = 0;
+	int sumz = 0;
+	for(int i = 0; i < current.m; i++){
+		sumx += current.matr[i][0];
+		sumy += current.matr[i][1];
+		sumz += current.matr[i][2];
 	}
-	double ybufmax = 0, ybufmin = 0;
-	for (int i = 0; i < this->n; i++){
-		ybufmax = max(ybufmax, current.matr[i][1]);
-		ybufmin = min(ybufmax, current.matr[i][1]);
-	}
-	double zbufmax = 0, zbufmin = 0;
-	for (int i = 0; i < this->n; i++){
-		zbufmax = max(zbufmax, current.matr[i][2]);
-		zbufmin = min(zbufmax, current.matr[i][2]);
-	}
-	center.x = (xbufmax + xbufmin) / 2;
-	center.y = (ybufmax + ybufmin) / 2;
-	center.z = (zbufmax + zbufmin) / 2;
+	center.x = sumx / current.m;
+	center.y = sumy / current.m;
+	center.z = sumz / current.m;
 	return center;
 }
 
@@ -139,18 +134,29 @@ void Figure::moveNegative(Matrix chn, bool dx, bool dy, bool dz){
 	}
 }
 
-void Figure::makeChanging(Matrix base, Matrix chn, point center){
+void Figure::makeChanging(Matrix base, Matrix scale, Matrix rotate, point center){
+	
 	this->norm(base, center);
 	int n = base.n;
 	int m = base.m;
 	Matrix current(n, m);
-	current = base.mul(base, chn);
+	//base.ShowMatrix();
+	current = base.mul(base, scale);
+	//current.ShowMatrix();
+	current = current.mul(current, rotate);
+	//rotate.ShowMatrix();
+	//current.ShowMatrix();
 	this->disnorm(base, center);
 	this->disnorm(current, center);
 	center = this->getCenter(current);
-	current.ShowMatrix();
-	base.ShowMatrix();
-	chn.ShowMatrix();
+	for(int i = 0; i < m; i++){
+		for(int j = 0; j < n; j++){
+			current.matr[i][j] = int(current.matr[i][j]);
+		}
+	}
+	//current.ShowMatrix();
+	//base.ShowMatrix();
+	//chn.ShowMatrix();
 	system("cls");
 	this->draw(current);
 }
@@ -179,10 +185,33 @@ void Figure::scaleBigger(Matrix chn){
 }
 
 void Figure::scaleSmaller(Matrix chn){
-	if(chn.matr[0][0] > 0.125){ // неграмотный костыль
+	//if(chn.matr[0][0] > 0.08){ // неграмотный костыль
 		chn.matr[0][0] /= dv;
 		chn.matr[1][1] /= dv;
 		chn.matr[2][2] /= dv;
-	}
+	//}
 }
 
+double Figure::getRad(double ung){
+	double newung;
+	newung = PI * ung / 180.0;
+	return newung;
+}
+
+Matrix Figure::rotateY(Matrix chn){
+	double radun = UNGLE;
+	double fi = this->getRad(radun);
+	Matrix bufchn(4, 4);
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j< 4; j++){
+			if(i == j)
+				bufchn.matr[i][j] = 1;
+		}
+	}
+	bufchn.matr[0][0] = cos(-fi);
+	bufchn.matr[0][2] = sin(-fi);
+	bufchn.matr[2][0] = -sin(-fi);
+	bufchn.matr[2][2] = cos(-fi);
+	chn = chn.mul(chn, bufchn);
+	return chn;
+}

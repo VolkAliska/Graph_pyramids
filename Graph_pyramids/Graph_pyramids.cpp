@@ -17,20 +17,23 @@ int main(){
 	Figure p1(4); // triangle pyramid
 	Matrix p1base(4, 4);
 	Matrix p1current(4,4);
-	Matrix p1chn(4, 4);
+	Matrix p1scale(4, 4);
+	Matrix p1rotate(4, 4);
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
-			if (i == j)
-				p1chn.matr[i][j] = 1;
+			if (i == j){
+				p1scale.matr[i][j] = 1;
+				p1rotate.matr[i][j] = 1;
+			}
 		}
 	}
 	point p1center;
 	
 	//example 
-	p1base.matr[0][0] = 2 * k; p1base.matr[0][1] = 3.5 * k; p1base.matr[0][2] = k; p1base.matr[0][3] = 1;
-	p1base.matr[1][0] = 3 * k; p1base.matr[1][1] = 2.5 * k; p1base.matr[1][2] = 2 * k; p1base.matr[1][3] = 1;
+	p1base.matr[0][0] = 2 * k; p1base.matr[0][1] = 3 * k; p1base.matr[0][2] = 3* k; p1base.matr[0][3] = 1;
+	p1base.matr[1][0] = 3 * k; p1base.matr[1][1] =  k; p1base.matr[1][2] = 2 * k; p1base.matr[1][3] = 1;
 	p1base.matr[2][0] = 4 * k; p1base.matr[2][1] = 3 * k; p1base.matr[2][2] = 3 * k; p1base.matr[2][3] = 1;
-	p1base.matr[3][0] = 3*k; p1base.matr[3][1] = k; p1base.matr[3][2] = 2*k; p1base.matr[3][3] = 1;
+	p1base.matr[3][0] = 3 * k; p1base.matr[3][1] = 4 * k; p1base.matr[3][2] = k; p1base.matr[3][3] = 1;
 	p1.draw(p1base);
 	p1center = p1.getCenter(p1base);
 
@@ -40,33 +43,38 @@ int main(){
 		}
 	}
 
-	////////////////
+	//----------
 	char mode;
 	while(true){
 		mode = _getwch();
 		if(mode == '2'){
-			p1.movePositive(p1chn, true, false, false);
-			p1.makeChanging(p1base, p1chn, p1center);
+			p1.movePositive(p1scale, true, false, false);
+			p1.makeChanging(p1base, p1scale, p1rotate, p1center);
 		}
 		if(mode == '3'){
-			p1.moveNegative(p1chn, true, false, false);
-			p1.makeChanging(p1base, p1chn,p1center);
+			p1.moveNegative(p1scale, true, false, false);
+			p1.makeChanging(p1base,  p1scale, p1rotate ,p1center);
 		}
 		if(mode == '4'){
-			p1.movePositive(p1chn, false, true, false);
-			p1.makeChanging(p1base, p1chn,p1center);
+			p1.movePositive(p1scale, false, true, false);
+			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 		}
 		if(mode == '5'){
-			p1.moveNegative(p1chn, false, true, false);
-			p1.makeChanging(p1base, p1chn,p1center);
+			p1.moveNegative(p1scale, false, true, false);
+			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 		}
 		if(mode == '6'){
-			p1.scaleBigger(p1chn);
-			p1.makeChanging(p1base, p1chn,p1center);
+			p1.scaleBigger(p1scale);
+			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 		}
 		if(mode == '7'){
-			p1.scaleSmaller(p1chn);
-			p1.makeChanging(p1base, p1chn,p1center);
+			p1.scaleSmaller(p1scale);
+			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+		}
+		if(mode == '8'){
+			p1rotate = p1.rotateY(p1rotate);
+			p1rotate.ShowMatrix();
+			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 		}
 		if(mode == '1')
 			break;
@@ -74,13 +82,7 @@ int main(){
  	Figure p2(5); // pyramid with the rectangle as a foundation
 	Matrix p2base(5, 4);
 	Matrix p2current(5,4);
-	Matrix p2chn(4, 4);
-	for (int i = 0; i < 4; i++){
-		for (int j = 0; j < 4; j++){
-			if (i == j)
-				p1chn.matr[i][j] = 1;
-		}
-	}
+	
 
 	point p2center;
 	//example 
@@ -101,4 +103,4 @@ int main(){
 	_getwch();
 
 	return 0;
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
