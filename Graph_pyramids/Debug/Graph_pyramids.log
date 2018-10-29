@@ -1,16 +1,12 @@
-﻿Построение начато 26.10.2018 20:41:06.
+﻿Построение начато 29.10.2018 23:31:30.
      1>Проект "D:\gr_kursach\Graph_pyramids\Graph_pyramids\Graph_pyramids\Graph_pyramids.vcxproj" в узле 2 (целевые объекты build).
      1>InitializeBuildStatus:
          Создание "Debug\Graph_pyramids.unsuccessfulbuild", так как было задано "AlwaysCreate".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Figure.cpp
-         Figure.cpp
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(25): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(26): warning C4244: инициализация: преобразование "double" в "const int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(32): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(32): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(36): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(36): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Graph_pyramids.cpp
+         Graph_pyramids.cpp
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\graph_pyramids.cpp(12): warning C4305: инициализация: усечение из "double" к "const float"
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\graph_pyramids.cpp(49): warning C4244: =: преобразование "wint_t" в "char", возможна потеря данных
        ManifestResourceCompile:
          Для всех выходных данных обновления не требуется.
        Link:
@@ -32,4 +28,4 @@
 
 Построение успешно завершено.
 
-Затраченное время: 00:00:03.34
+Затраченное время: 00:00:03.31

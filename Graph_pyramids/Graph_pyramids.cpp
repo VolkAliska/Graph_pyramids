@@ -73,7 +73,6 @@ int main(){
 		}
 		if(mode == '8'){
 			p1rotate = p1.rotateY(p1rotate);
-			p1rotate.ShowMatrix();
 			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 		}
 		if(mode == '1')
