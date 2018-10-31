@@ -15,12 +15,91 @@ COLORREF colorf = RGB(180, 0, 20);
 Figure::Figure(int n){
 	this->n = n;
 	kx = 1; ky = 1; kz = 1;
+	
+}
 
-	/*for (int i = 0; i < MAXSIZE; i++){
-		for(int j = 0; j < MAXSIZE; j++){
-			bitmap[i][j] = 0;
+Matrix Figure::preBrezenhem(Matrix premap, double x1, double y1, double x2, double y2) {
+	const int deltaX = abs(x2 - x1);
+	const int deltaY = abs(y2 - y1);
+	const int signX = x1 < x2 ? 1 : -1;
+	const int signY = y1 < y2 ? 1 : -1;
+
+	int error = deltaX - deltaY;
+
+	//SetPixel(hdcf, x2, y2, RGB(255, 255, 255));
+	premap.matr[SPACE + int(y2)][SPACE + int(x2)] = 2;//граница
+	while ((int(x1) != int(x2)) || (int(y1) != int(y2)))
+	{
+		//SetPixel(hdcf, x1, y1, RGB(255, 255, 255));
+		premap.matr[SPACE + int(y1)][SPACE + int(x1)] = 2;
+		const int error2 = error * 2;
+		if (error2 > -deltaY)
+		{
+			error -= deltaY;
+			x1 += signX;
 		}
-	}*/
+		if (error2 < deltaX)
+		{
+			error += deltaX;
+			y1 += signY;
+		}
+	}
+	int i = 1;
+	return premap;
+}
+
+Matrix Figure::preTriangle(Matrix premap, point p1, point p2, point p3){
+	premap = preBrezenhem(premap, p1.x, p1.y, p2.x, p2.y);
+	premap = preBrezenhem(premap, p2.x, p2.y, p3.x, p3.y);
+	premap = preBrezenhem(premap, p1.x, p1.y, p3.x, p3.y);
+	return premap;
+}
+
+Matrix Figure::preRectangle(Matrix premap, point p1, point p2, point p3, point p4){
+	premap = preBrezenhem(premap, p1.x, p1.y, p2.x, p2.y);
+	premap = preBrezenhem(premap, p2.x, p2.y, p3.x, p3.y);
+	premap = preBrezenhem(premap, p3.x, p3.y, p4.x, p4.y);
+	premap = preBrezenhem(premap, p1.x, p1.y, p4.x, p4.y);
+	return premap;
+}
+
+Matrix Figure::preColor(Matrix premap){
+	int i = 0, j = 0;
+	for (i = 0; i < premap.n; i++){
+		for (j = 0; j < premap.m; j++){
+			if ((premap.matr[i][j] == 2) && (premap.matr[i][j+1] != 2)){
+				j++;
+				int flag = 0;
+				for (int k = j; k < premap.m; k++){
+					if (premap.matr[i][k] == 2)
+						flag = 1;
+				}
+				if (flag == 1){
+					while (premap.matr[i][j] !=2){// TO DO проверка на мин и макс по У
+						premap.matr[i][j] = 3; // наличие цвета
+						j++;
+						//SetPixel(hdc, j, i, color);
+					}
+				}
+				break;
+			}
+		}
+	}
+	return premap;
+}
+
+Matrix Figure::getBitmap(Matrix bitmap, Matrix premap){
+	for (int i = 0; i<bitmap.n; i++){
+		for (int j = 0; j<bitmap.m; j++){
+			bitmap.matr[i][j] = premap.matr[SPACE + i][SPACE + j];
+		}
+	}
+	for (int i = 0; i < premap.n; i++){
+		for (int j = 0; j < premap.m; j++){
+			premap.matr[i][j] = 0;
+		}
+	}
+	return bitmap;
 }
 
 void Figure::drawBrezenhem(double x1, double y1, double x2, double y2) {
@@ -156,6 +235,21 @@ Matrix Figure::makeChanging(Matrix base, Matrix scale, Matrix rotate, point cent
 	system("cls");
 	//this->draw(current);
 	return current;
+}
+
+void Figure::Color(Matrix bitmap){
+	COLORREF cb = RGB(255, 255, 255);
+	COLORREF c = colorf;
+	for (int i = 0; i<bitmap.n; i++){
+		for (int j = 0; j<bitmap.m; j++){
+			if (bitmap.matr[i][j] == 2){
+				SetPixel(hdcf, j, i, cb);
+			}
+			if (bitmap.matr[i][j] == 3){
+				SetPixel(hdcf, j, i, c);
+			}
+		}
+	}
 }
 
 void Figure::norm(Matrix base, point center){

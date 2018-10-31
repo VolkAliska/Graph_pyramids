@@ -15,6 +15,11 @@
 #include <stdlib.h>
 #include <cstdlib>
 
+const int SPACE = 300;
+const int HEIGTH = 480;
+const int WIDTH = 640;
+const int pmHeigth = 2 * SPACE + HEIGTH;
+const int pmWidth = 2 * SPACE + WIDTH;
 
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

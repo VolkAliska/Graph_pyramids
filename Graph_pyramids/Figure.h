@@ -16,15 +16,22 @@ class Figure{
 public:
 	int n; 
 	Figure(int n); // n - number of vertexes
-	//int bitmap[MAXSIZE][MAXSIZE];
 	int kx, ky, kz; // for rotation
+
+	//--MAKE BITMAP--
+
+	Matrix preBrezenhem(Matrix premap, double x1, double y1, double x2, double y2);
+	Matrix preTriangle(Matrix premap, point p1, point p2, point p3);
+	Matrix preRectangle(Matrix premap, point p1, point p2, point p3, point p4);
+	Matrix preColor(Matrix premap);
+	Matrix getBitmap(Matrix bitmap, Matrix premap);
 
 	//--DRAW--
 	void drawBrezenhem(double x1, double y1, double x2, double y2);
 	void draw(Matrix current);
 	void drawTriangle(point p1, point p2, point p3);
 	void drawRectangle(point p1, point p2, point p3, point p4);
-	//void Color(COLORREF color);
+	void Color(Matrix bitmap);
 
 	//--CHANGES
 	void movePositive(Matrix chn, bool dx, bool dy, bool dz);

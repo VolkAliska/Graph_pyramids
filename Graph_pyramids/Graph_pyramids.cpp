@@ -14,11 +14,27 @@ const double UNGLE = 10.0;
 const int k = 16;
 
 int main(){
+
+	Matrix bitmap(HEIGTH, WIDTH);
+	for (int i = 0; i < HEIGTH; i++){
+		for(int j = 0; j < WIDTH; j++){
+			bitmap.matr[i][j] = 0;
+		}
+	}
+
+	Matrix premap(pmHeigth, pmWidth);
+	for (int i = 0; i < pmHeigth; i++){
+		for(int j = 0; j < pmWidth; j++){
+			premap.matr[i][j] = 0;
+		}
+	}
+
 	Figure p1(4); // triangle pyramid
 	Matrix p1base(4, 4);
 	Matrix p1current(4,4);
 	Matrix p1scale(4, 4);
 	Matrix p1rotate(4, 4);
+
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
 			if (i == j){
@@ -35,6 +51,28 @@ int main(){
 	p1base.matr[2][0] = 4 * k; p1base.matr[2][1] = 3 * k; p1base.matr[2][2] = 3 * k; p1base.matr[2][3] = 1;
 	p1base.matr[3][0] = 3 * k; p1base.matr[3][1] = 4 * k; p1base.matr[3][2] = k; p1base.matr[3][3] = 1;
 	p1.draw(p1base);
+	//////////
+	point p1p1, p1p2, p1p3;
+	p1p1.x = p1base.matr[0][0];
+	p1p1.y = p1base.matr[0][1];
+	p1p1.z = p1base.matr[0][2];
+	p1p2.x = p1base.matr[1][0];
+	p1p2.y = p1base.matr[1][1];
+	p1p2.z = p1base.matr[1][2];
+	p1p3.x = p1base.matr[2][0];
+	p1p3.y = p1base.matr[2][1];
+	p1p3.z = p1base.matr[2][2];
+	premap = p1.preTriangle(premap, p1p1, p1p2, p1p3);
+	premap = p1.preColor(premap);
+	bitmap = p1.getBitmap(bitmap, premap);
+	for (int i = 0; i < premap.n; i++){
+		for (int j = 0; j < premap.m; j++){
+			premap.matr[i][j] = 0;
+		}
+	}
+	p1.Color(bitmap);
+
+	//////////
 	p1center = p1.getCenter(p1base);
 
 	for (int i = 0; i < p1base.n; i++){

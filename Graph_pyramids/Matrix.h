@@ -8,7 +8,7 @@ using namespace std;
 
 class Matrix{
 public:
-	int n, m;
+	int n, m; // n - rows, m - columns
 	double **matr;
 	Matrix(int n, int m);
 	Matrix();
