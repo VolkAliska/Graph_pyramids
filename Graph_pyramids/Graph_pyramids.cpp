@@ -43,61 +43,169 @@ int main(){
 		}
 	}
 
+	Figure p2(5); // rectangle pyramid
+	Matrix p2base(5, 4);
+	Matrix p2current(5, 4);
+	Matrix p2scale(4, 4);
+	Matrix p2rotate(4, 4);
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j < 4; j++){
+			if (i == j){
+				p2scale.matr[i][j] = 1;
+				p2rotate.matr[i][j] = 1;
+			}
+		}
+	}
+	point p2center;
+	
+	p2base.matr[0][0] = 5 * k; p2base.matr[0][1] = 4 * k; p2base.matr[0][2] = 4 * k; p2base.matr[0][3] = 1;
+	p2base.matr[1][0] = 6.5 * k; p2base.matr[1][1] = 1 * k; p2base.matr[1][2] = 5 * k; p2base.matr[1][3] = 1;
+	p2base.matr[2][0] = 6 * k; p2base.matr[2][1] = 3.5 * k; p2base.matr[2][2] = 6 * k; p2base.matr[2][3] = 1;
+	p2base.matr[3][0] = 8 * k; p2base.matr[3][1] = 3.5 * k; p2base.matr[3][2] = 6 * k; p2base.matr[3][3] = 1;
+	p2base.matr[4][0] = 7 * k; p2base.matr[4][1] = 4 * k; p2base.matr[4][2] = 4 * k; p2base.matr[4][3] = 1;
+	p2.draw(p2base);
+	p2center = p2.getCenter(p2base);
+
+	for (int i = 0; i < p2base.n; i++){
+		for (int j = 0; j < p2base.m; j++){
+			p2current.matr[i][j] = p2base.matr[i][j];
+		}
+	}
+
 	//----------
 	char mode;
 	while(true){
 		mode = _getwch();
 		if(mode == '2'){
 			p1.movePositive(p1scale, true, false, false);
-			p1.makeChanging(p1base, p1scale, p1rotate, p1center);
+			p1current = p1.makeChanging(p1base, p1scale, p1rotate, p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '3'){
 			p1.moveNegative(p1scale, true, false, false);
-			p1.makeChanging(p1base,  p1scale, p1rotate ,p1center);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate ,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '4'){
 			p1.movePositive(p1scale, false, true, false);
-			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '5'){
 			p1.moveNegative(p1scale, false, true, false);
-			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '6'){
 			p1.scaleBigger(p1scale);
-			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '7'){
 			p1.scaleSmaller(p1scale);
-			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '8'){
 			p1rotate = p1.rotateY(p1rotate);
-			p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
+		}
+		if(mode == '9'){
+			p1rotate = p1.rotateX(p1rotate);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
+		}
+		if(mode == '0'){
+			p1rotate = p1.rotateZ(p1rotate);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p1center = p1.getCenter(p1base);
+		}
+		if(mode == 'w'){
+			p2.movePositive(p2scale, true, false, false);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p1.draw(p1current);
+			p2.draw(p2current);
+			p2center = p2.getCenter(p2base);
+		}
+		if(mode == 'e'){
+			p2.moveNegative(p2scale, true, false, false);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
+		}
+		if(mode == 'r'){
+			p2.movePositive(p2scale, false, true, false);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
+		}
+		if(mode == 't'){
+			p2.moveNegative(p2scale, false, true, false);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
+		}
+		if(mode == 'y'){
+			p2.scaleBigger(p2scale);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
+		}
+		if(mode == 'u'){
+			p2.scaleSmaller(p2scale);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
+		}
+		if(mode == 'i'){
+			p2rotate = p2.rotateY(p2rotate);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
+		}
+		if(mode == 'o'){
+			p2rotate = p2.rotateX(p2rotate);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
+		}
+		if(mode == 'p'){
+			p2rotate = p2.rotateZ(p2rotate);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p1.draw(p1current);
+			p2.draw(p2current);
 		}
 		if(mode == '1')
 			break;
 	}
- 	Figure p2(5); // pyramid with the rectangle as a foundation
-	Matrix p2base(5, 4);
-	Matrix p2current(5,4);
-	
-
-	point p2center;
-	//example 
-	p2base.matr[0][0] = 5 * k; p2base.matr[0][1] = 3.5 * k; p2base.matr[0][2] = k; p2base.matr[0][3] = 1;
-	p2base.matr[1][0] = 6 * k; p2base.matr[1][1] = 1.5 * k; p2base.matr[1][2] = 2 * k; p2base.matr[1][3] = 1;
-	p2base.matr[2][0] = 6 * k; p2base.matr[2][1] = 3 * k; p2base.matr[2][2] = 3 * k; p2base.matr[2][3] = 1;
-	p2base.matr[3][0] = 7.5 * k; p2base.matr[3][1] = 3.5 * k; p2base.matr[3][2] = 2 * k; p2base.matr[3][3] = 1;
-	p2base.matr[4][0] = 6.5 * k; p2base.matr[4][1] = 4.5 * k; p2base.matr[4][2] = 1.5 * k; p2base.matr[4][3] = 1;
-	p2.draw(p2base);
-
-	p2center = p2.getCenter(p2base);
-	for (int i = 0; i < p2base.n; i++){
-		for (int j = 0; j < p2base.m; j++){
-			p2current.matr[i][j] = p2base.matr[i][j];
-		}
-	}
+ 
 	
 	_getwch();
 

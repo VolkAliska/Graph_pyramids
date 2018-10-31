@@ -134,23 +134,19 @@ void Figure::moveNegative(Matrix chn, bool dx, bool dy, bool dz){
 	}
 }
 
-void Figure::makeChanging(Matrix base, Matrix scale, Matrix rotate, point center){
+Matrix Figure::makeChanging(Matrix base, Matrix scale, Matrix rotate, point center){
 	
 	this->norm(base, center);
 	int n = base.n;
 	int m = base.m;
 	Matrix current(n, m);
-	//base.ShowMatrix();
-	current = base.mul(base, scale);
-	//current.ShowMatrix();
-	current = current.mul(current, rotate);
-	//rotate.ShowMatrix();
-	//current.ShowMatrix();
+	current = base.mul(base, rotate);
+	current = current.mul(current, scale);
 	this->disnorm(base, center);
 	this->disnorm(current, center);
 	center = this->getCenter(current);
-	for(int i = 0; i < m; i++){
-		for(int j = 0; j < n; j++){
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < m; j++){
 			current.matr[i][j] = int(current.matr[i][j]);
 		}
 	}
@@ -158,7 +154,8 @@ void Figure::makeChanging(Matrix base, Matrix scale, Matrix rotate, point center
 	//base.ShowMatrix();
 	//chn.ShowMatrix();
 	system("cls");
-	this->draw(current);
+	//this->draw(current);
+	return current;
 }
 
 void Figure::norm(Matrix base, point center){
@@ -212,6 +209,42 @@ Matrix Figure::rotateY(Matrix chn){
 	bufchn.matr[0][2] = sin(-fi);
 	bufchn.matr[2][0] = -sin(-fi);
 	bufchn.matr[2][2] = cos(-fi);
+	chn = chn.mul(chn, bufchn);
+	return chn;
+}
+
+Matrix Figure::rotateX(Matrix chn){
+	double radun = UNGLE;
+	double fi = this->getRad(radun);
+	Matrix bufchn(4, 4);
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j< 4; j++){
+			if(i == j)
+				bufchn.matr[i][j] = 1;
+		}
+	}
+	bufchn.matr[1][1] = cos(fi);
+	bufchn.matr[1][2] = sin(fi);
+	bufchn.matr[2][1] = -sin(fi);
+	bufchn.matr[2][2] = cos(fi);
+	chn = chn.mul(chn, bufchn);
+	return chn;
+}
+
+Matrix Figure::rotateZ(Matrix chn){
+	double radun = UNGLE;
+	double fi = this->getRad(radun);
+	Matrix bufchn(4, 4);
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j< 4; j++){
+			if(i == j)
+				bufchn.matr[i][j] = 1;
+		}
+	}
+	bufchn.matr[0][0] = cos(fi);
+	bufchn.matr[0][1] = sin(fi);
+	bufchn.matr[1][0] = -sin(fi);
+	bufchn.matr[1][1] = cos(fi);
 	chn = chn.mul(chn, bufchn);
 	return chn;
 }

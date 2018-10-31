@@ -29,12 +29,14 @@ public:
 	//--CHANGES
 	void movePositive(Matrix chn, bool dx, bool dy, bool dz);
 	void moveNegative(Matrix chn, bool dx, bool dy, bool dz);
-	void makeChanging(Matrix base, Matrix scale, Matrix rotate, point center); //clean space, cnahge * base, draw
+	Matrix makeChanging(Matrix base, Matrix scale, Matrix rotate, point center); //clean space, cnahge * base, draw
 	void norm(Matrix base, point center);
 	void disnorm(Matrix base, point center);
 	void scaleBigger(Matrix chn);
 	void scaleSmaller(Matrix chn);
 	Matrix rotateY(Matrix chn);
+	Matrix rotateX(Matrix chn);
+	Matrix rotateZ(Matrix chn);
 	point getCenter(Matrix current);
 	double getRad(double ung);
 };
