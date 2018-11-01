@@ -29,6 +29,14 @@ Matrix::Matrix(){
 	m = 0;
 }
 
+void Matrix::clean(){
+	for (int i = 0; i < this->n; i++){
+		for (int j = 0; j < this->m; j++){
+			this->matr[i][j] = 0;
+		}
+	}
+}
+
 void Matrix::ShowMatrix(){
 	int i, j;
 	for (i = 0; i<n; i++){

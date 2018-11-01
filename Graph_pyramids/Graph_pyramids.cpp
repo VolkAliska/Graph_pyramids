@@ -50,9 +50,10 @@ int main(){
 	p1base.matr[1][0] = 3 * k; p1base.matr[1][1] =  k; p1base.matr[1][2] = 2 * k; p1base.matr[1][3] = 1;
 	p1base.matr[2][0] = 4 * k; p1base.matr[2][1] = 3 * k; p1base.matr[2][2] = 3 * k; p1base.matr[2][3] = 1;
 	p1base.matr[3][0] = 3 * k; p1base.matr[3][1] = 4 * k; p1base.matr[3][2] = k; p1base.matr[3][3] = 1;
-	p1.draw(p1base);
+	bitmap = p1.draw(bitmap, premap, p1base);
+	bitmap.clean();
 	//////////
-	point p1p1, p1p2, p1p3;
+	/*point p1p1, p1p2, p1p3;
 	p1p1.x = p1base.matr[0][0];
 	p1p1.y = p1base.matr[0][1];
 	p1p1.z = p1base.matr[0][2];
@@ -71,7 +72,7 @@ int main(){
 		}
 	}
 	p1.Color(bitmap);
-
+*/
 	//////////
 	p1center = p1.getCenter(p1base);
 
@@ -101,7 +102,8 @@ int main(){
 	p2base.matr[2][0] = 6 * k; p2base.matr[2][1] = 3.5 * k; p2base.matr[2][2] = 6 * k; p2base.matr[2][3] = 1;
 	p2base.matr[3][0] = 8 * k; p2base.matr[3][1] = 3.5 * k; p2base.matr[3][2] = 6 * k; p2base.matr[3][3] = 1;
 	p2base.matr[4][0] = 7 * k; p2base.matr[4][1] = 4 * k; p2base.matr[4][2] = 4 * k; p2base.matr[4][3] = 1;
-	p2.draw(p2base);
+	bitmap = p2.draw(bitmap, premap, p2base);
+	bitmap.clean();
 	p2center = p2.getCenter(p2base);
 
 	for (int i = 0; i < p2base.n; i++){
@@ -117,128 +119,164 @@ int main(){
 		if(mode == '2'){
 			p1.movePositive(p1scale, true, false, false);
 			p1current = p1.makeChanging(p1base, p1scale, p1rotate, p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '3'){
 			p1.moveNegative(p1scale, true, false, false);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate ,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '4'){
 			p1.movePositive(p1scale, false, true, false);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '5'){
 			p1.moveNegative(p1scale, false, true, false);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '6'){
 			p1.scaleBigger(p1scale);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '7'){
 			p1.scaleSmaller(p1scale);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '8'){
 			p1rotate = p1.rotateY(p1rotate);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '9'){
 			p1rotate = p1.rotateX(p1rotate);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '0'){
 			p1rotate = p1.rotateZ(p1rotate);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p1.Color(bitmap);
+			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == 'w'){
 			p2.movePositive(p2scale, true, false, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 			p2center = p2.getCenter(p2base);
 		}
 		if(mode == 'e'){
 			p2.moveNegative(p2scale, true, false, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == 'r'){
 			p2.movePositive(p2scale, false, true, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == 't'){
 			p2.moveNegative(p2scale, false, true, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == 'y'){
 			p2.scaleBigger(p2scale);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == 'u'){
 			p2.scaleSmaller(p2scale);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == 'i'){
 			p2rotate = p2.rotateY(p2rotate);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == 'o'){
 			p2rotate = p2.rotateX(p2rotate);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == 'p'){
 			p2rotate = p2.rotateZ(p2rotate);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			p1.draw(p1current);
-			p2.draw(p2current);
+			bitmap = p1.draw(bitmap, premap, p1current);
+			bitmap = p2.draw(bitmap, premap, p2current);
+			p2.Color(bitmap);
+			bitmap.clean();
 		}
 		if(mode == '1')
 			break;

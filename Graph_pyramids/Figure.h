@@ -28,9 +28,9 @@ public:
 
 	//--DRAW--
 	void drawBrezenhem(double x1, double y1, double x2, double y2);
-	void draw(Matrix current);
-	void drawTriangle(point p1, point p2, point p3);
-	void drawRectangle(point p1, point p2, point p3, point p4);
+	Matrix draw(Matrix bitmap, Matrix premap, Matrix current);
+	Matrix drawTriangle(Matrix premap, point p1, point p2, point p3);
+	Matrix drawRectangle(Matrix premap, point p1, point p2, point p3, point p4);
 	void Color(Matrix bitmap);
 
 	//--CHANGES

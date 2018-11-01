@@ -15,7 +15,7 @@ public:
 	//~Matrix();
 	Matrix mul(Matrix base, Matrix change);
 	void ShowMatrix();
-
+	void clean();
 	//void Norm(point cen);
 	//void Back(point cen);
 

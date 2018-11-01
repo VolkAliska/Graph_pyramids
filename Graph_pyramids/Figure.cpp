@@ -91,12 +91,8 @@ Matrix Figure::preColor(Matrix premap){
 Matrix Figure::getBitmap(Matrix bitmap, Matrix premap){
 	for (int i = 0; i<bitmap.n; i++){
 		for (int j = 0; j<bitmap.m; j++){
-			bitmap.matr[i][j] = premap.matr[SPACE + i][SPACE + j];
-		}
-	}
-	for (int i = 0; i < premap.n; i++){
-		for (int j = 0; j < premap.m; j++){
-			premap.matr[i][j] = 0;
+			if (bitmap.matr[i][j] != premap.matr[SPACE + i][SPACE + j])
+				bitmap.matr[i][j] += premap.matr[SPACE + i][SPACE + j];
 		}
 	}
 	return bitmap;
@@ -132,7 +128,8 @@ void Figure::drawBrezenhem(double x1, double y1, double x2, double y2) {
 	int i = 1;
 }
 
-void Figure::draw(Matrix current){
+
+Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 	if (current.n == 4){
 		point points[4];
 		for(int i = 0; i < n; i++){
@@ -140,10 +137,23 @@ void Figure::draw(Matrix current){
 			points[i].y = current.matr[i][1];
 			points[i].z = current.matr[i][2];
 		}
-		this->drawTriangle(points[0], points[1], points[2]);
-		this->drawTriangle(points[2], points[1], points[3]);
-		this->drawTriangle(points[3], points[1], points[0]);
-		this->drawTriangle(points[0], points[2], points[3]);
+		this->drawTriangle(premap, points[0], points[1], points[2]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		this->drawTriangle(premap, points[2], points[1], points[3]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		this->drawTriangle(premap, points[3], points[1], points[0]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		this->drawTriangle(premap, points[0], points[2], points[3]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		return bitmap;
 	}
 	if (current.n == 5){
 		point points[5];
@@ -152,25 +162,45 @@ void Figure::draw(Matrix current){
 			points[i].y = current.matr[i][1];
 			points[i].z = current.matr[i][2];
 		}
-		this->drawTriangle(points[0], points[1], points[2]);
-		this->drawTriangle(points[2], points[1], points[3]);
-		this->drawTriangle(points[3], points[1], points[4]);
-		this->drawTriangle(points[0], points[1], points[4]);
-		this->drawRectangle(points[0], points[2], points[3], points[4]);
+		this->drawTriangle(premap, points[0], points[1], points[2]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		this->drawTriangle(premap, points[2], points[1], points[3]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		this->drawTriangle(premap, points[3], points[1], points[4]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		this->drawTriangle(premap, points[0], points[1], points[4]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		this->drawRectangle(premap, points[0], points[2], points[3], points[4]);
+		premap = preColor(premap);
+		bitmap = getBitmap(bitmap, premap);
+		premap.clean();
+		return bitmap;
 	}
 }
 
-void Figure::drawTriangle(point p1, point p2, point p3){
+Matrix Figure::drawTriangle(Matrix premap, point p1, point p2, point p3){
 	drawBrezenhem(p1.x, p1.y, p2.x, p2.y);
 	drawBrezenhem(p2.x, p2.y, p3.x, p3.y);
 	drawBrezenhem(p1.x, p1.y, p3.x, p3.y);
+	premap = preTriangle(premap, p1, p2, p3);
+	return premap;
 }
 
-void Figure::drawRectangle(point p1, point p2, point p3, point p4){
+Matrix Figure::drawRectangle(Matrix premap, point p1, point p2, point p3, point p4){
 	drawBrezenhem(p1.x, p1.y, p2.x, p2.y);
 	drawBrezenhem(p2.x, p2.y, p3.x, p3.y);
 	drawBrezenhem(p3.x, p3.y, p4.x, p4.y);
 	drawBrezenhem(p1.x, p1.y, p4.x, p4.y);
+	premap = preRectangle(premap, p1, p2, p3, p4);
+	return premap;
 }
 
 point Figure::getCenter(Matrix current){
