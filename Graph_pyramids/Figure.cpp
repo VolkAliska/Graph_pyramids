@@ -3,10 +3,10 @@
 #include "stdafx.h"
 #include "Figure.h"
 using namespace std;
-const int dk = 10;
-const double dv = 2.0;
-const float PI = 3.14;
-const double UNGLE = 15.0;
+//const int dk = 10;
+//const double dv = 2.0;
+//const float PI = 3.14;
+//const double UNGLE = 15.0;
 
 HWND hwndf = GetConsoleWindow();
 HDC hdcf = GetDC(hwndf);
@@ -63,7 +63,7 @@ Matrix Figure::preRectangle(Matrix premap, point p1, point p2, point p3, point p
 	return premap;
 }
 
-Matrix Figure::preColor(Matrix premap){
+Matrix Figure::preColor(Matrix premap, int color){
 	int i = 0, j = 0;
 	for (i = 0; i < premap.n; i++){
 		for (j = 0; j < premap.m; j++){
@@ -76,7 +76,7 @@ Matrix Figure::preColor(Matrix premap){
 				}
 				if (flag == 1){
 					while (premap.matr[i][j] !=2){// TO DO проверка на мин и макс по У
-						premap.matr[i][j] = 3; // наличие цвета
+						premap.matr[i][j] = color; // наличие цвета
 						j++;
 						//SetPixel(hdc, j, i, color);
 					}
@@ -91,7 +91,7 @@ Matrix Figure::preColor(Matrix premap){
 Matrix Figure::getBitmap(Matrix bitmap, Matrix premap){
 	for (int i = 0; i<bitmap.n; i++){
 		for (int j = 0; j<bitmap.m; j++){
-			if (bitmap.matr[i][j] != premap.matr[SPACE + i][SPACE + j])
+			if (bitmap.matr[i][j] == 0)
 				bitmap.matr[i][j] += premap.matr[SPACE + i][SPACE + j];
 		}
 	}
@@ -138,22 +138,21 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 			points[i].z = current.matr[i][2];
 		}
 		this->drawTriangle(premap, points[0], points[1], points[2]);
-		premap = preColor(premap);
+		premap = preColor(premap, 3);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 		this->drawTriangle(premap, points[2], points[1], points[3]);
-		premap = preColor(premap);
+		premap = preColor(premap, 4);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 		this->drawTriangle(premap, points[3], points[1], points[0]);
-		premap = preColor(premap);
+		premap = preColor(premap, 5);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 		this->drawTriangle(premap, points[0], points[2], points[3]);
-		premap = preColor(premap);
+		premap = preColor(premap, 6);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		return bitmap;
 	}
 	if (current.n == 5){
 		point points[5];
@@ -163,27 +162,27 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 			points[i].z = current.matr[i][2];
 		}
 		this->drawTriangle(premap, points[0], points[1], points[2]);
-		premap = preColor(premap);
+		premap = preColor(premap, 3);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 		this->drawTriangle(premap, points[2], points[1], points[3]);
-		premap = preColor(premap);
+		premap = preColor(premap, 4);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 		this->drawTriangle(premap, points[3], points[1], points[4]);
-		premap = preColor(premap);
+		premap = preColor(premap, 5);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 		this->drawTriangle(premap, points[0], points[1], points[4]);
-		premap = preColor(premap);
+		premap = preColor(premap, 6);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 		this->drawRectangle(premap, points[0], points[2], points[3], points[4]);
-		premap = preColor(premap);
+		premap = preColor(premap, 7);
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		return bitmap;
 	}
+	return bitmap;
 }
 
 Matrix Figure::drawTriangle(Matrix premap, point p1, point p2, point p3){
@@ -267,19 +266,51 @@ Matrix Figure::makeChanging(Matrix base, Matrix scale, Matrix rotate, point cent
 	return current;
 }
 
-void Figure::Color(Matrix bitmap){
-	COLORREF cb = RGB(255, 255, 255);
-	COLORREF c = colorf;
+void Figure::color(Matrix bitmap){
+	COLORREF white = RGB(255, 255, 255);
+	COLORREF red = RGB(178, 34, 34);
+	COLORREF blue = RGB(0, 128, 128);
+	COLORREF green = RGB(50, 205, 50);
+	COLORREF yellow = RGB(255, 215, 0);
+	COLORREF purple = RGB(199, 21, 133);
+	COLORREF gray = RGB(105, 105, 105);
 	for (int i = 0; i<bitmap.n; i++){
 		for (int j = 0; j<bitmap.m; j++){
 			if (bitmap.matr[i][j] == 2){
-				SetPixel(hdcf, j, i, cb);
+				SetPixel(hdcf, j, i, white);
 			}
 			if (bitmap.matr[i][j] == 3){
-				SetPixel(hdcf, j, i, c);
+				SetPixel(hdcf, j, i, red);
+			}
+			if (bitmap.matr[i][j] == 4){
+				SetPixel(hdcf, j, i, blue);
+			}
+			if (bitmap.matr[i][j] == 5){
+				SetPixel(hdcf, j, i, green);
+			}
+			if (bitmap.matr[i][j] == 6){
+				SetPixel(hdcf, j, i, yellow);
+			}
+			if (bitmap.matr[i][j] == 7){
+				SetPixel(hdcf, j, i, purple);
+			}
+			if (bitmap.matr[i][j] == 8){
+				SetPixel(hdcf, j, i, gray);
 			}
 		}
 	}
+}
+
+Matrix Figure::makeShadmap(Matrix bitmap){
+	Matrix shadmap(bitmap.n+SPACE, bitmap.m);
+	for (int i = 0; i < bitmap.n; i++){
+		for (int j = 0; j < bitmap.m; j++){
+			if (bitmap.matr[i][j] != 0){
+				shadmap.matr[i+SHADSTEP][j] = 8; // to do нормальный отступ
+			}
+		}
+	}
+	return shadmap;
 }
 
 void Figure::norm(Matrix base, point center){

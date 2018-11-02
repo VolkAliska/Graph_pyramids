@@ -23,7 +23,7 @@ public:
 	Matrix preBrezenhem(Matrix premap, double x1, double y1, double x2, double y2);
 	Matrix preTriangle(Matrix premap, point p1, point p2, point p3);
 	Matrix preRectangle(Matrix premap, point p1, point p2, point p3, point p4);
-	Matrix preColor(Matrix premap);
+	Matrix preColor(Matrix premap, int color);
 	Matrix getBitmap(Matrix bitmap, Matrix premap);
 
 	//--DRAW--
@@ -31,7 +31,10 @@ public:
 	Matrix draw(Matrix bitmap, Matrix premap, Matrix current);
 	Matrix drawTriangle(Matrix premap, point p1, point p2, point p3);
 	Matrix drawRectangle(Matrix premap, point p1, point p2, point p3, point p4);
-	void Color(Matrix bitmap);
+	void color(Matrix bitmap);
+
+	//--SHADOWS--
+	Matrix makeShadmap(Matrix bitmap);
 
 	//--CHANGES
 	void movePositive(Matrix chn, bool dx, bool dy, bool dz);

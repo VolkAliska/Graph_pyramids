@@ -21,5 +21,11 @@ const int WIDTH = 640;
 const int pmHeigth = 2 * SPACE + HEIGTH;
 const int pmWidth = 2 * SPACE + WIDTH;
 
+const int dk = 10;
+const double dv = 2.0;
+const float PI = 3.14;
+const double UNGLE = 15.0;
+
+const int SHADSTEP = 60;
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
