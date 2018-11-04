@@ -43,8 +43,12 @@ public:
 
 	//--SHADOWS--
 
-
+	Matrix getShadTriangle(Matrix premap, point p1, point p2, point p3, int miny);
+	Matrix getShadRectangle(Matrix premap, point p1, point p2, point p3, point p4, int miny);
+	Matrix preShadBrezenhem(Matrix premap, double x1, double y1, double x2, double y2);
+	
 	//--CHANGES
+
 	void movePositive(Matrix chn, bool dx, bool dy, bool dz);
 	void moveNegative(Matrix chn, bool dx, bool dy, bool dz);
 	Matrix makeChanging(Matrix base, Matrix scale, Matrix rotate, point center); //clean space, cnahge * base, draw

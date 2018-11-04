@@ -21,6 +21,9 @@ int main(){
 	Matrix premap(pmHeigth, pmWidth);
 	premap.clean();
 
+	Matrix shadmap(HEIGTH+SPACE, WIDTH);
+	shadmap.clean();
+
 	Figure p1(4); // triangle pyramid
 	Matrix p1base(4, 4);
 	Matrix p1current(4,4);

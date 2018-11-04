@@ -48,6 +48,36 @@ Matrix Figure::preBrezenhem(Matrix premap, double x1, double y1, double x2, doub
 	return premap;
 }
 
+Matrix Figure::preShadBrezenhem(Matrix premap, double x1, double y1, double x2, double y2) {
+	const int deltaX = abs(x2 - x1);
+	const int deltaY = abs(y2 - y1);
+	const int signX = x1 < x2 ? 1 : -1;
+	const int signY = y1 < y2 ? 1 : -1;
+
+	int error = deltaX - deltaY;
+
+	//SetPixel(hdcf, x2, y2, RGB(255, 255, 255));
+	premap.matr[SPACE + int(y2)][SPACE + int(x2)] = 8;//граница
+	while ((int(x1) != int(x2)) || (int(y1) != int(y2)))
+	{
+		//SetPixel(hdcf, x1, y1, RGB(255, 255, 255));
+		premap.matr[SPACE + int(y1)][SPACE + int(x1)] = 8;
+		const int error2 = error * 2;
+		if (error2 > -deltaY)
+		{
+			error -= deltaY;
+			x1 += signX;
+		}
+		if (error2 < deltaX)
+		{
+			error += deltaX;
+			y1 += signY;
+		}
+	}
+	int i = 1;
+	return premap;
+}
+
 Matrix Figure::preTriangle(Matrix premap, point p1, point p2, point p3){
 	premap = preBrezenhem(premap, p1.x, p1.y, p2.x, p2.y);
 	premap = preBrezenhem(premap, p2.x, p2.y, p3.x, p3.y);
@@ -67,15 +97,15 @@ Matrix Figure::preColor(Matrix premap, int color){
 	int i = 0, j = 0;
 	for (i = 0; i < premap.n; i++){
 		for (j = 0; j < premap.m; j++){
-			if ((premap.matr[i][j] == 2) && (premap.matr[i][j+1] != 2)){
+			if (((premap.matr[i][j] == 2)||(premap.matr[i][j] == 8)) && ((premap.matr[i][j+1] != 2)&&(premap.matr[i][j+1] != 8))){
 				j++;
 				int flag = 0;
 				for (int k = j; k < premap.m; k++){
-					if (premap.matr[i][k] == 2)
+					if ((premap.matr[i][k] == 2)||(premap.matr[i][k] == 8))
 						flag = 1;
 				}
 				if (flag == 1){
-					while (premap.matr[i][j] !=2){// TO DO проверка на мин и макс по У
+					while ((premap.matr[i][j] !=2)&&(premap.matr[i][j] !=8)){// TO DO проверка на мин и макс по У
 						premap.matr[i][j] = color; // наличие цвета
 						j++;
 						//SetPixel(hdc, j, i, color);
@@ -151,7 +181,6 @@ void Figure::drawBrezenhem(double x1, double y1, double x2, double y2) {
 	int i = 1;
 }
 
-
 Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 	if (current.n == 4){
 		point points[4];
@@ -160,12 +189,17 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 			points[i].y = current.matr[i][1];
 			points[i].z = current.matr[i][2];
 		}
-
+		int miny = 0;
+		miny = min(min(points[0].y, points[1].y), min(points[2].y, points[3].y));
 		bool color;
 		color = this->isPlaneVisible(points[0], points[1], points[2]);
 		if (color){
 			this->drawTriangle(premap, points[0], points[1], points[2]);
 			premap = preColor(premap, 3);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[0], points[1], points[2], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -174,6 +208,10 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 		if (color){
 			this->drawTriangle(premap, points[2], points[1], points[3]);
 			premap = preColor(premap, 4);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[2], points[1], points[3], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -182,6 +220,10 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 		if (color){
 			this->drawTriangle(premap, points[3], points[1], points[0]);
 			premap = preColor(premap, 5);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[3], points[1], points[0], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -190,6 +232,10 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 		if (color){
 			this->drawTriangle(premap, points[0], points[2], points[3]);
 			premap = preColor(premap, 6);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[0], points[2], points[3], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -201,11 +247,18 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 			points[i].y = current.matr[i][1];
 			points[i].z = current.matr[i][2];
 		}
+		int miny = 0;
+		miny = min(min(points[2].y, points[3].y),min(points[0].y, points[1].y));
+		miny = min(points[4].y, miny);
 		bool color;
 
 		color = this->isPlaneVisible(points[0], points[1], points[2]);if (color){
 			this->drawTriangle(premap, points[0], points[1], points[2]);
 			premap = preColor(premap, 3);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[0], points[1], points[2], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -214,6 +267,10 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 		if (color){
 			this->drawTriangle(premap, points[2], points[1], points[3]);
 			premap = preColor(premap, 4);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[2], points[1], points[3], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -222,6 +279,10 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 		if (color){
 			this->drawTriangle(premap, points[3], points[1], points[4]);
 			premap = preColor(premap, 5);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[3], points[1], points[4], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -231,6 +292,10 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 		if (!color){
 			this->drawTriangle(premap, points[0], points[1], points[4]);
 			premap = preColor(premap, 6);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadTriangle(premap, points[0], points[1], points[4], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
@@ -239,11 +304,32 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 		if (color){
 			this->drawRectangle(premap, points[0], points[2], points[3], points[4]);
 			premap = preColor(premap, 7);
+			bitmap = getBitmap(bitmap, premap);
+			premap.clean();
+			premap = getShadRectangle(premap, points[0], points[2], points[3], points[4], miny);
+			premap = preColor(premap, 8);
 		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 	}
 	return bitmap;
+}
+
+Matrix Figure::getShadTriangle(Matrix premap, point p1, point p2, point p3, int miny){
+	
+	premap = preShadBrezenhem(premap, p1.x, p1.y + SHADSTEP - miny, p2.x, p2.y + SHADSTEP - miny);
+	premap = preShadBrezenhem(premap, p2.x, p2.y + SHADSTEP - miny, p3.x, p3.y + SHADSTEP - miny);
+	premap = preShadBrezenhem(premap, p1.x, p1.y + SHADSTEP - miny, p3.x, p3.y + SHADSTEP - miny);
+	return premap;
+}
+
+Matrix Figure::getShadRectangle(Matrix premap, point p1, point p2, point p3, point p4, int miny){
+	
+	premap = preShadBrezenhem(premap, p1.x, p1.y + SHADSTEP - miny, p2.x, p2.y + SHADSTEP - miny);
+	premap = preShadBrezenhem(premap, p2.x, p2.y + SHADSTEP - miny, p3.x, p3.y + SHADSTEP - miny);
+	premap = preShadBrezenhem(premap, p3.x, p3.y + SHADSTEP - miny, p4.x, p4.y + SHADSTEP - miny);
+	premap = preShadBrezenhem(premap, p1.x, p1.y + SHADSTEP - miny, p4.x, p4.y + SHADSTEP - miny);
+	return premap;
 }
 
 Matrix Figure::drawTriangle(Matrix premap, point p1, point p2, point p3){
@@ -381,10 +467,10 @@ void Figure::color(Matrix bitmap){
 				SetPixel(hdcf, j, i, green);
 			}
 			if (bitmap.matr[i][j] == 6){
-				SetPixel(hdcf, j, i, yellow);
+				SetPixel(hdcf, j, i, purple);
 			}
 			if (bitmap.matr[i][j] == 7){
-				SetPixel(hdcf, j, i, purple);
+				SetPixel(hdcf, j, i, yellow);
 			}
 			if (bitmap.matr[i][j] == 8){
 				SetPixel(hdcf, j, i, gray);
