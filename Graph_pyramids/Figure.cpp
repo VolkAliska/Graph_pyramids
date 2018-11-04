@@ -89,12 +89,35 @@ Matrix Figure::preColor(Matrix premap, int color){
 }
 
 Matrix Figure::getBitmap(Matrix bitmap, Matrix premap){
+	/*int maxy = 0;
+	for (int i = 0; i<premap.n; i++){
+		for (int j = 0; j<premap.m; j++){
+			if (premap.matr[i][j] != 0){
+				maxy = i;
+				goto p1;
+			}
+		}
+	}
+p1:*/
+	//maxy -= SPACE;
 	for (int i = 0; i<bitmap.n; i++){
 		for (int j = 0; j<bitmap.m; j++){
 			if (bitmap.matr[i][j] == 0)
 				bitmap.matr[i][j] += premap.matr[SPACE + i][SPACE + j];
+			/*if (i > 200){
+				bitmap.matr[i][j] += premap.matr[SPACE + maxy][SPACE + j];
+				
+			}*/
 		}
+		/*if (i > 200)
+			maxy++;*/
 	}
+	/*for (int i = 200; i<bitmap.n; i++){
+		for (int j = 0; j<bitmap.m; j++){
+			if (bitmap.matr[i][j] != 0)
+				bitmap.matr[i][j] = 8;
+		}
+	}*/
 	return bitmap;
 }
 
@@ -137,20 +160,37 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 			points[i].y = current.matr[i][1];
 			points[i].z = current.matr[i][2];
 		}
-		this->drawTriangle(premap, points[0], points[1], points[2]);
-		premap = preColor(premap, 3);
+
+		bool color;
+		color = this->isPlaneVisible(points[0], points[1], points[2]);
+		if (color){
+			this->drawTriangle(premap, points[0], points[1], points[2]);
+			premap = preColor(premap, 3);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		this->drawTriangle(premap, points[2], points[1], points[3]);
-		premap = preColor(premap, 4);
+
+		color = this->isPlaneVisible(points[2], points[1], points[3]);
+		if (color){
+			this->drawTriangle(premap, points[2], points[1], points[3]);
+			premap = preColor(premap, 4);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		this->drawTriangle(premap, points[3], points[1], points[0]);
-		premap = preColor(premap, 5);
+
+		color = this->isPlaneVisible(points[3], points[1], points[0]);
+		if (color){
+			this->drawTriangle(premap, points[3], points[1], points[0]);
+			premap = preColor(premap, 5);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		this->drawTriangle(premap, points[0], points[2], points[3]);
-		premap = preColor(premap, 6);
+
+		color = this->isPlaneVisible(points[0], points[2], points[3]);
+		if (color){
+			this->drawTriangle(premap, points[0], points[2], points[3]);
+			premap = preColor(premap, 6);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 	}
@@ -161,24 +201,45 @@ Matrix Figure::draw(Matrix bitmap, Matrix premap, Matrix current){
 			points[i].y = current.matr[i][1];
 			points[i].z = current.matr[i][2];
 		}
-		this->drawTriangle(premap, points[0], points[1], points[2]);
-		premap = preColor(premap, 3);
+		bool color;
+
+		color = this->isPlaneVisible(points[0], points[1], points[2]);if (color){
+			this->drawTriangle(premap, points[0], points[1], points[2]);
+			premap = preColor(premap, 3);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		this->drawTriangle(premap, points[2], points[1], points[3]);
-		premap = preColor(premap, 4);
+
+		color = this->isPlaneVisible(points[2], points[1], points[3]);
+		if (color){
+			this->drawTriangle(premap, points[2], points[1], points[3]);
+			premap = preColor(premap, 4);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		this->drawTriangle(premap, points[3], points[1], points[4]);
-		premap = preColor(premap, 5);
+
+		color = this->isPlaneVisible(points[3], points[1], points[4]);
+		if (color){
+			this->drawTriangle(premap, points[3], points[1], points[4]);
+			premap = preColor(premap, 5);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		this->drawTriangle(premap, points[0], points[1], points[4]);
-		premap = preColor(premap, 6);
+
+		color = this->isPlaneVisible(points[0], points[1], points[4]);
+		//
+		if (!color){
+			this->drawTriangle(premap, points[0], points[1], points[4]);
+			premap = preColor(premap, 6);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
-		this->drawRectangle(premap, points[0], points[2], points[3], points[4]);
-		premap = preColor(premap, 7);
+
+		color = this->isPlaneVisible(points[0], points[2], points[3]);
+		if (color){
+			this->drawRectangle(premap, points[0], points[2], points[3], points[4]);
+			premap = preColor(premap, 7);
+		}
 		bitmap = getBitmap(bitmap, premap);
 		premap.clean();
 	}
@@ -242,6 +303,37 @@ void Figure::moveNegative(Matrix chn, bool dx, bool dy, bool dz){
 	}
 }
 
+point Figure::getN(point p1, point p2, point p3){
+	point N;
+	point v1,v2; // вектора, которые по сути - стороны треугольника
+	v1.x = p2.x - p1.x;  v1.y = p2.y - p1.y;  v1.z = p2.z - p1.z; // p2-p1
+	v2.x = p3.x - p1.x;  v2.y = p3.y - p1.y;  v2.z = p3.z - p1.z; // p3-p1
+	// векторное произведение даст вектор, перпендикулярный плоскости = нормаль
+	N.x = v1.y*v2.z - v1.z*v2.y;
+	N.y = v1.z*v2.x - v1.x*v2.z;
+	N.z = v1.x*v2.y - v1.y*v2.x;
+	return N;
+}
+
+double Figure::skalar(point v1,point v2){
+	double skalar;
+	skalar = (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
+	return skalar;
+}
+
+bool Figure::isPlaneVisible(point p1, point p2, point p3/*, point L*/){
+	point N;
+	N = getN(p1, p2, p3);
+	point L;
+	L.x = 0;
+	L.y = 0;
+	L.z = -10;
+	double nl = this->skalar(N, L);
+	if (nl > 0)
+		return true;
+	return false;
+}
+
 Matrix Figure::makeChanging(Matrix base, Matrix scale, Matrix rotate, point center){
 	
 	this->norm(base, center);
@@ -299,18 +391,6 @@ void Figure::color(Matrix bitmap){
 			}
 		}
 	}
-}
-
-Matrix Figure::makeShadmap(Matrix bitmap){
-	Matrix shadmap(bitmap.n+SPACE, bitmap.m);
-	for (int i = 0; i < bitmap.n; i++){
-		for (int j = 0; j < bitmap.m; j++){
-			if (bitmap.matr[i][j] != 0){
-				shadmap.matr[i+SHADSTEP][j] = 8; // to do нормальный отступ
-			}
-		}
-	}
-	return shadmap;
 }
 
 void Figure::norm(Matrix base, point center){

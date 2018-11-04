@@ -18,9 +18,6 @@ int main(){
 	Matrix bitmap(HEIGTH, WIDTH);
 	bitmap.clean();
 
-	Matrix shadmap(HEIGTH+SPACE, WIDTH);
-	shadmap.clean();
-
 	Matrix premap(pmHeigth, pmWidth);
 	premap.clean();
 
@@ -116,11 +113,8 @@ int main(){
 			p1current = p1.makeChanging(p1base, p1scale, p1rotate, p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '3'){
@@ -128,11 +122,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate ,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '4'){
@@ -140,11 +131,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '5'){
@@ -152,11 +140,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '6'){
@@ -164,11 +149,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '7'){
@@ -176,11 +158,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '8'){
@@ -188,11 +167,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '9'){
@@ -200,11 +176,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == '0'){
@@ -212,11 +185,8 @@ int main(){
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p1.makeShadmap(bitmap);
-			p1.color(shadmap);
 			p1.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
 		if(mode == 'w'){
@@ -224,11 +194,8 @@ int main(){
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 			p2center = p2.getCenter(p2base);
 		}
 		if(mode == 'e'){
@@ -237,10 +204,7 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
-			shadmap.clean();
 			bitmap.clean();
 		}
 		if(mode == 'r'){
@@ -249,11 +213,8 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 		}
 		if(mode == 't'){
 			p2.moveNegative(p2scale, false, true, false);
@@ -261,11 +222,8 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 		}
 		if(mode == 'y'){
 			p2.scaleBigger(p2scale);
@@ -273,11 +231,8 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 		}
 		if(mode == 'u'){
 			p2.scaleSmaller(p2scale);
@@ -285,11 +240,8 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 		}
 		if(mode == 'i'){
 			p2rotate = p2.rotateY(p2rotate);
@@ -297,11 +249,8 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 		}
 		if(mode == 'o'){
 			p2rotate = p2.rotateX(p2rotate);
@@ -309,11 +258,8 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 		}
 		if(mode == 'p'){
 			p2rotate = p2.rotateZ(p2rotate);
@@ -321,11 +267,8 @@ int main(){
 			p2center = p2.getCenter(p2base);
 			bitmap = p1.draw(bitmap, premap, p1current);
 			bitmap = p2.draw(bitmap, premap, p2current);
-			shadmap = p2.makeShadmap(bitmap);
-			p2.color(shadmap);
 			p2.color(bitmap);
 			bitmap.clean();
-			shadmap.clean();
 		}
 		if(mode == '1')
 			break;

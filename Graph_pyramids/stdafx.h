@@ -16,7 +16,7 @@
 #include <cstdlib>
 
 const int SPACE = 300;
-const int HEIGTH = 480;
+const int HEIGTH = 480; // 480 figure and 480 shadow
 const int WIDTH = 640;
 const int pmHeigth = 2 * SPACE + HEIGTH;
 const int pmWidth = 2 * SPACE + WIDTH;
@@ -26,6 +26,6 @@ const double dv = 2.0;
 const float PI = 3.14;
 const double UNGLE = 15.0;
 
-const int SHADSTEP = 60;
+const int SHADSTEP = 400;
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

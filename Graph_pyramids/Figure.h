@@ -25,8 +25,16 @@ public:
 	Matrix preRectangle(Matrix premap, point p1, point p2, point p3, point p4);
 	Matrix preColor(Matrix premap, int color);
 	Matrix getBitmap(Matrix bitmap, Matrix premap);
+	
+	//--ROBERTS--
+
+	point getN(point p1, point p2, point p3); // нормаль к плоскости, плохо, что как point 
+	//принимаем, что тут x, y и z - это координаты вектора, а не точка
+	double skalar(point v1,point v2);
+	bool isPlaneVisible(point p1, point p2, point p3/*, point L*/); // N - нормаль, L - вектор наблюдателя
 
 	//--DRAW--
+
 	void drawBrezenhem(double x1, double y1, double x2, double y2);
 	Matrix draw(Matrix bitmap, Matrix premap, Matrix current);
 	Matrix drawTriangle(Matrix premap, point p1, point p2, point p3);
@@ -34,7 +42,7 @@ public:
 	void color(Matrix bitmap);
 
 	//--SHADOWS--
-	Matrix makeShadmap(Matrix bitmap);
+
 
 	//--CHANGES
 	void movePositive(Matrix chn, bool dx, bool dy, bool dz);
