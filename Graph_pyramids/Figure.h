@@ -40,6 +40,7 @@ public:
 	Matrix drawTriangle(Matrix premap, point p1, point p2, point p3);
 	Matrix drawRectangle(Matrix premap, point p1, point p2, point p3, point p4);
 	void color(Matrix bitmap);
+	Matrix getProect(Matrix current);
 
 	//--SHADOWS--
 

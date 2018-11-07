@@ -1,4 +1,4 @@
-﻿Построение начато 04.11.2018 23:34:21.
+﻿Построение начато 07.11.2018 10:57:59.
      1>Проект "D:\gr_kursach\Graph_pyramids\Graph_pyramids\Graph_pyramids\Graph_pyramids.vcxproj" в узле 2 (целевые объекты build).
      1>InitializeBuildStatus:
          Создание "Debug\Graph_pyramids.unsuccessfulbuild", так как было задано "AlwaysCreate".
@@ -17,11 +17,39 @@
      1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(166): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
      1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(166): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
      1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(193): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(251): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(252): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(358): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(359): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
-     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(360): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(202): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(203): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(204): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(224): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(225): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(226): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(246): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(247): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(248): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(268): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(269): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(270): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(291): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(292): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(301): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(302): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(303): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(323): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(324): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(325): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(345): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(346): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(347): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(368): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(369): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(370): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(390): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(391): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(392): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(393): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(451): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(452): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+     1>d:\gr_kursach\graph_pyramids\graph_pyramids\graph_pyramids\figure.cpp(453): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
        ManifestResourceCompile:
          Для всех выходных данных обновления не требуется.
        Link:
@@ -43,4 +71,4 @@
 
 Построение успешно завершено.
 
-Затраченное время: 00:00:24.20
+Затраченное время: 00:00:23.82

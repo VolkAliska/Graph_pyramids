@@ -29,6 +29,7 @@ int main(){
 	Matrix p1current(4,4);
 	Matrix p1scale(4, 4);
 	Matrix p1rotate(4, 4);
+	Matrix p1pr(4,4);
 
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
@@ -76,12 +77,14 @@ int main(){
 			p1current.matr[i][j] = p1base.matr[i][j];
 		}
 	}
+	p1pr = p1.getProect(p1current);
 
 	Figure p2(5); // rectangle pyramid
 	Matrix p2base(5, 4);
 	Matrix p2current(5, 4);
 	Matrix p2scale(4, 4);
 	Matrix p2rotate(4, 4);
+	Matrix p2pr(5, 4);
 	for (int i = 0; i < 4; i++){
 		for (int j = 0; j < 4; j++){
 			if (i == j){
@@ -106,7 +109,7 @@ int main(){
 			p2current.matr[i][j] = p2base.matr[i][j];
 		}
 	}
-
+	p2pr = p2.getProect(p2current);
 	//----------
 	char mode;
 	while(true){
@@ -114,8 +117,9 @@ int main(){
 		if(mode == '2'){
 			p1.movePositive(p1scale, true, false, false);
 			p1current = p1.makeChanging(p1base, p1scale, p1rotate, p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -123,8 +127,9 @@ int main(){
 		if(mode == '3'){
 			p1.moveNegative(p1scale, true, false, false);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate ,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -132,8 +137,9 @@ int main(){
 		if(mode == '4'){
 			p1.movePositive(p1scale, false, true, false);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -141,8 +147,9 @@ int main(){
 		if(mode == '5'){
 			p1.moveNegative(p1scale, false, true, false);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -150,8 +157,9 @@ int main(){
 		if(mode == '6'){
 			p1.scaleBigger(p1scale);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -159,8 +167,9 @@ int main(){
 		if(mode == '7'){
 			p1.scaleSmaller(p1scale);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -168,8 +177,9 @@ int main(){
 		if(mode == '8'){
 			p1rotate = p1.rotateY(p1rotate);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -177,8 +187,9 @@ int main(){
 		if(mode == '9'){
 			p1rotate = p1.rotateX(p1rotate);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
@@ -186,17 +197,40 @@ int main(){
 		if(mode == '0'){
 			p1rotate = p1.rotateZ(p1rotate);
 			p1current = p1.makeChanging(p1base,  p1scale, p1rotate,p1center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p1.color(bitmap);
 			bitmap.clean();
 			p1center = p1.getCenter(p1base);
 		}
+		if(mode == 'z'){
+			p1.movePositive(p1scale, false, false, true);
+			p1current = p1.makeChanging(p1base, p1scale, p1rotate, p1center);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
+			p1.color(bitmap);
+			bitmap.clean();
+			p1center = p1.getCenter(p1base);
+		}
+		if(mode == 'x'){
+			p1.moveNegative(p1scale, false, false, true);
+			p1current = p1.makeChanging(p1base,  p1scale, p1rotate ,p1center);
+			p1pr = p1.getProect(p1current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
+			p1.color(bitmap);
+			bitmap.clean();
+			p1center = p1.getCenter(p1base);
+		}
+		//
 		if(mode == 'w'){
 			p2.movePositive(p2scale, true, false, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 			p2center = p2.getCenter(p2base);
@@ -205,8 +239,9 @@ int main(){
 			p2.moveNegative(p2scale, true, false, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}
@@ -214,8 +249,9 @@ int main(){
 			p2.movePositive(p2scale, false, true, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}
@@ -223,8 +259,9 @@ int main(){
 			p2.moveNegative(p2scale, false, true, false);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}
@@ -232,8 +269,9 @@ int main(){
 			p2.scaleBigger(p2scale);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}
@@ -241,8 +279,9 @@ int main(){
 			p2.scaleSmaller(p2scale);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}
@@ -250,8 +289,9 @@ int main(){
 			p2rotate = p2.rotateY(p2rotate);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}
@@ -259,8 +299,9 @@ int main(){
 			p2rotate = p2.rotateX(p2rotate);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}
@@ -268,8 +309,29 @@ int main(){
 			p2rotate = p2.rotateZ(p2rotate);
 			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
 			p2center = p2.getCenter(p2base);
-			bitmap = p1.draw(bitmap, premap, p1current);
-			bitmap = p2.draw(bitmap, premap, p2current);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
+			p2.color(bitmap);
+			bitmap.clean();
+		}
+		if(mode == 'c'){
+			p2.movePositive(p2scale, false, false, true);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
+			p2.color(bitmap);
+			bitmap.clean();
+			p2center = p2.getCenter(p2base);
+		}
+		if(mode == 'v'){
+			p2.moveNegative(p2scale, false, false, true);
+			p2current = p2.makeChanging(p2base, p2scale, p2rotate, p2center);
+			p2center = p2.getCenter(p2base);
+			p2pr = p2.getProect(p2current);
+			bitmap = p1.draw(bitmap, premap, p1pr);
+			bitmap = p2.draw(bitmap, premap, p2pr);
 			p2.color(bitmap);
 			bitmap.clean();
 		}

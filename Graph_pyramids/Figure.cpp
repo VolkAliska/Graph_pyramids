@@ -401,6 +401,26 @@ point Figure::getN(point p1, point p2, point p3){
 	return N;
 }
 
+Matrix Figure::getProect(Matrix current){
+	Matrix proekt(4, 4);
+	proekt.clean();
+	proekt.matr[0][0] = 1;
+	proekt.matr[1][1] = 1;
+	proekt.matr[2][0] = 1.4 / 4;
+	proekt.matr[2][1] = 1.4 / 4;
+	proekt.matr[3][3] = 1;
+
+	Matrix proections(current.n , 4);
+	proections = current.mul(current, proekt);
+	for (int i = 0; i < current.n; i++){
+		for(int j = 0; j < 4; j++){
+			proections.matr[i][j] = int(proections.matr[i][j]);
+		}
+	}
+	return proections;
+}
+
+
 double Figure::skalar(point v1,point v2){
 	double skalar;
 	skalar = (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);

@@ -26,6 +26,6 @@ const double dv = 2.0;
 const float PI = 3.14;
 const double UNGLE = 15.0;
 
-const int SHADSTEP = 200;
+const int SHADSTEP = 350;
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
