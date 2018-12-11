@@ -43,9 +43,9 @@ int main(){
 	
 	//example 
 	p1base.matr[0][0] = 2 * k; p1base.matr[0][1] = 3 * k; p1base.matr[0][2] = 3* k; p1base.matr[0][3] = 1;
-	p1base.matr[1][0] = 3 * k; p1base.matr[1][1] =  k; p1base.matr[1][2] = 2 * k; p1base.matr[1][3] = 1;
-	p1base.matr[2][0] = 4 * k; p1base.matr[2][1] = 3 * k; p1base.matr[2][2] = 3 * k; p1base.matr[2][3] = 1;
-	p1base.matr[3][0] = 3 * k; p1base.matr[3][1] = 4 * k; p1base.matr[3][2] = k; p1base.matr[3][3] = 1;
+	p1base.matr[1][0] = 3.5 * k; p1base.matr[1][1] =  k; p1base.matr[1][2] = 2.5 * k; p1base.matr[1][3] = 1;
+	p1base.matr[2][0] = 5 * k; p1base.matr[2][1] = 3 * k; p1base.matr[2][2] = 3 * k; p1base.matr[2][3] = 1;
+	p1base.matr[3][0] = 4 * k; p1base.matr[3][1] = 3 * k; p1base.matr[3][2] = k; p1base.matr[3][3] = 1;
 	bitmap = p1.draw(bitmap, premap, p1base);
 	bitmap.clean();
 	//////////
@@ -97,8 +97,8 @@ int main(){
 	
 	p2base.matr[0][0] = 5 * k; p2base.matr[0][1] = 4 * k; p2base.matr[0][2] = 4 * k; p2base.matr[0][3] = 1;
 	p2base.matr[1][0] = 6.5 * k; p2base.matr[1][1] = 1 * k; p2base.matr[1][2] = 5 * k; p2base.matr[1][3] = 1;
-	p2base.matr[2][0] = 6 * k; p2base.matr[2][1] = 3.5 * k; p2base.matr[2][2] = 6 * k; p2base.matr[2][3] = 1;
-	p2base.matr[3][0] = 8 * k; p2base.matr[3][1] = 3.5 * k; p2base.matr[3][2] = 6 * k; p2base.matr[3][3] = 1;
+	p2base.matr[2][0] = 6 * k; p2base.matr[2][1] = 4 * k; p2base.matr[2][2] = 6 * k; p2base.matr[2][3] = 1;
+	p2base.matr[3][0] = 8 * k; p2base.matr[3][1] = 4 * k; p2base.matr[3][2] = 6 * k; p2base.matr[3][3] = 1;
 	p2base.matr[4][0] = 7 * k; p2base.matr[4][1] = 4 * k; p2base.matr[4][2] = 4 * k; p2base.matr[4][3] = 1;
 	bitmap = p2.draw(bitmap, premap, p2base);
 	bitmap.clean();
